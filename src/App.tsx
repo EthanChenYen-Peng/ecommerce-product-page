@@ -1,4 +1,5 @@
 import styled from 'styled-components/macro'
+import { QUERIES } from './constants'
 export default function App() {
   return (
     <div>
@@ -9,4 +10,8 @@ export default function App() {
 
 const Heading = styled.h1`
   color: red;
+
+  @media ${QUERIES.desktopAndAbove} {
+    color: blue;
+  }
 `
