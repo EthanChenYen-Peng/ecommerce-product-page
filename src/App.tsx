@@ -9,7 +9,7 @@ export default function App() {
 }
 
 const Heading = styled.h1`
-  color: red;
+  color: #fff;
 
   @media ${QUERIES.desktopAndAbove} {
     color: blue;
