@@ -1,4 +1,5 @@
 import styled from 'styled-components/macro'
+import { QUERIES } from '../../constants'
 interface Props {
   image: string
 }
@@ -22,5 +23,9 @@ const ImageWrapper = styled.div`
     height: 100%;
     width: 100%;
     display: block;
+  }
+  @media ${QUERIES.desktopAndAbove} {
+    width: 32px;
+    height: 32px;
   }
 `

@@ -17,17 +17,37 @@ export default function Header() {
         </LogoWrapper>
       </Wrapper>
       <UserMenu>
-        <CartIcon />
+        <CarBtn>
+          <CartIcon />
+        </CarBtn>
         <Avatar image={avatarImg} />
       </UserMenu>
     </Nav>
   )
 }
 
+const CarBtn = styled.button`
+  background-color: inherit;
+  border: 0;
+
+  svg {
+    transform: scale(0.7);
+  }
+`
 const Nav = styled.nav`
   display: flex;
   align-items: center;
   padding: 6px 4px;
+
+  @media ${QUERIES.desktopAndAbove} {
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 24px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--color-dark-blue-100);
+    width: 70%;
+    margin: 0 auto;
+  }
 `
 
 const Wrapper = styled.div`
@@ -48,6 +68,9 @@ const ToggleMenu = styled.button`
   border: 0;
   img {
     display: block;
+  }
+  @media ${QUERIES.desktopAndAbove} {
+    display: none;
   }
 `
 
