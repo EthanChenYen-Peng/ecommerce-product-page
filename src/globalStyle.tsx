@@ -18,7 +18,6 @@ export const GlobalStyle = createGlobalStyle`
   html {
     --color-orange-100: hsl(26, 100%, 55%);
     --color-orange-200: hsl(25, 100%, 94%);
-
     --color-dark-blue-200: hsl(219, 9%, 45%);
     --color-dark-blue-100: hsl(220, 14%, 75%);
     --color-dark-blue-300: hsl(220, 13%, 13%);

@@ -1,17 +1,8 @@
-import styled from 'styled-components/macro'
-import { QUERIES } from './constants'
+import Header from './components/Header'
 export default function App() {
   return (
-    <div>
-      <Heading>Hello from React</Heading>
-    </div>
+    <>
+      <Header />
+    </>
   )
 }
-
-const Heading = styled.h1`
-  color: #fff;
-
-  @media ${QUERIES.desktopAndAbove} {
-    color: blue;
-  }
-`
