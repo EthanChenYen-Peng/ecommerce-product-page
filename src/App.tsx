@@ -1,7 +1,12 @@
+import styled from 'styled-components/macro'
 export default function App() {
   return (
     <div>
-      <h1>Hello from React</h1>
+      <Heading>Hello from React</Heading>
     </div>
   )
 }
+
+const Heading = styled.h1`
+  color: red;
+`
