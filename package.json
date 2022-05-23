@@ -5,12 +5,19 @@
   "source": "src/index.html",
   "scripts": {
     "dev": "parcel",
-    "build": "parcel build"
+    "build": "parcel build",
+    "lint": "eslint --fix \"src/**/*.{ts,tsx}\"",
+    "format": "prettier --write \"src/**/*.{ts,tsx}\""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "parcel": "^2.5.0"
+    "@typescript-eslint/eslint-plugin": "^5.25.0",
+    "@typescript-eslint/parser": "^5.25.0",
+    "eslint": "^8.16.0",
+    "eslint-plugin-react": "^7.30.0",
+    "parcel": "^2.5.0",
+    "prettier": "^2.6.2"
   }
 }
