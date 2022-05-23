@@ -1,23 +1,23 @@
 import styled from 'styled-components/macro'
 import { QUERIES } from '../../constants'
 import Avatar from './Avatar'
-import logoImg from '../../images/logo.svg'
-import menuIcon from '../../images/icon-menu.svg'
-import cartIcon from '../../images/icon-cart.svg'
+import LogoIcon from 'jsx:../../images/logo.svg'
+import MenuIcon from 'jsx:../../images/icon-menu.svg'
+import CartIcon from 'jsx:../../images/icon-cart.svg'
 import avatarImg from '../../images/image-avatar.png'
 export default function Header() {
   return (
     <Nav>
       <Wrapper>
         <ToggleMenu>
-          <img src={menuIcon} />
+          <MenuIcon />
         </ToggleMenu>
         <LogoWrapper>
-          <img src={logoImg} />
+          <LogoIcon />
         </LogoWrapper>
       </Wrapper>
       <UserMenu>
-        <img src={cartIcon} />
+        <CartIcon />
         <Avatar image={avatarImg} />
       </UserMenu>
     </Nav>
