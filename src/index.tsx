@@ -1,13 +1,12 @@
-import { createRoot } from 'react-dom/client'
+import { render } from 'react-dom'
 import React from 'react'
 import App from './App'
 import { GlobalStyle } from './globalStyle'
 
-const container = document.getElementById('root')
-const root = createRoot(container)
-root.render(
+render(
   <React.StrictMode>
     <App />
     <GlobalStyle />
-  </React.StrictMode>
+  </React.StrictMode>,
+  document.getElementById('root')
 )
