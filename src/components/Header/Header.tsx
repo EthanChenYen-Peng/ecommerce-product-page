@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import styled from 'styled-components/macro'
 import { QUERIES } from '../../constants'
 import Avatar from './Avatar'
@@ -7,10 +8,12 @@ import MenuIcon from 'jsx:../../images/icon-menu.svg'
 import CartIcon from 'jsx:../../images/icon-cart.svg'
 import avatarImg from '../../images/image-avatar.png'
 export default function Header() {
+  const [open, setOpen] = useState(false)
+  console.log(open)
   return (
     <Nav>
       <Wrapper>
-        <ToggleMenu>
+        <ToggleMenu onClick={() => setOpen(!open)}>
           <MenuIcon />
         </ToggleMenu>
         <LogoWrapper>
@@ -30,7 +33,7 @@ export default function Header() {
         </CarBtn>
         <Avatar image={avatarImg} />
       </UserMenu>
-      <MobileMenu />
+      <MobileMenu open={open} close={() => setOpen(false)} />
     </Nav>
   )
 }
