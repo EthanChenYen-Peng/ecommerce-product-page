@@ -1,5 +1,7 @@
 import styled from 'styled-components/macro'
 import { QUERIES } from '../../constants'
+import SelectionAmountBtn from './SelectionAmountBtn'
+import CartIcon from 'jsx:../../images/icon-cart.svg'
 
 export default function MainSection() {
   return (
@@ -20,10 +22,38 @@ export default function MainSection() {
           <DiscountPercentage>50</DiscountPercentage>
           <OriginalPrice>250</OriginalPrice>
         </PriceContainer>
+        <ButtonContainer>
+          <SelectionAmountBtn />
+          <AddToCartBtn>
+            <CartIcon />
+            Add to cart
+          </AddToCartBtn>
+        </ButtonContainer>
       </InfoSection>
     </Container>
   )
 }
+
+const ButtonContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+`
+
+const AddToCartBtn = styled.button`
+  background-color: var(--color-orange-100);
+  font-weight: 600;
+  font-size: 1.125rem;
+  color: white;
+  border: none;
+  padding: 1rem;
+  border-radius: 10px;
+
+  & svg {
+    fill: white;
+    height: 1em;
+  }
+`
 
 const CurrentPrice = styled.span`
   &:before {
