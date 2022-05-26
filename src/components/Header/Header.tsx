@@ -1,6 +1,7 @@
 import styled from 'styled-components/macro'
 import { QUERIES } from '../../constants'
 import Avatar from './Avatar'
+import MobileMenu from './MobileMenu'
 import LogoIcon from 'jsx:../../images/logo.svg'
 import MenuIcon from 'jsx:../../images/icon-menu.svg'
 import CartIcon from 'jsx:../../images/icon-cart.svg'
@@ -29,6 +30,7 @@ export default function Header() {
         </CarBtn>
         <Avatar image={avatarImg} />
       </UserMenu>
+      <MobileMenu />
     </Nav>
   )
 }
@@ -44,7 +46,7 @@ const CarBtn = styled.button`
 const Nav = styled.nav`
   display: flex;
   align-items: center;
-  padding: 6px 4px;
+  padding: 12px 8px;
 
   @media ${QUERIES.desktopAndAbove} {
     padding-left: 0;
