@@ -23,4 +23,8 @@ export const GlobalStyle = createGlobalStyle`
     --color-dark-blue-300: hsl(220, 13%, 13%);
     --color-dark-blue-50: hsl(223, 64%, 98%);
   }
+
+  body {
+    font-family: 'Kumbh Sans', sans-serif;
+  }
 `

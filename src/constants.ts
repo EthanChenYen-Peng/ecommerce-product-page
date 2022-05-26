@@ -1,5 +1,5 @@
 const breakpoints = {
-  desktopAndAbove: 600,
+  desktopAndAbove: 768,
 }
 
 export const QUERIES = {

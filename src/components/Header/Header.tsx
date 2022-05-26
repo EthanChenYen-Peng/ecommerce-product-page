@@ -15,6 +15,13 @@ export default function Header() {
         <LogoWrapper>
           <LogoIcon />
         </LogoWrapper>
+        <DesktopNav>
+          <NavLink>Collections</NavLink>
+          <NavLink>Men</NavLink>
+          <NavLink>Women</NavLink>
+          <NavLink>About</NavLink>
+          <NavLink>Contact</NavLink>
+        </DesktopNav>
       </Wrapper>
       <UserMenu>
         <CarBtn>
@@ -53,6 +60,26 @@ const Nav = styled.nav`
 const Wrapper = styled.div`
   display: flex;
   gap: 12px;
+  @media ${QUERIES.desktopAndAbove} {
+    gap: 40px;
+  }
+`
+
+const DesktopNav = styled.ul`
+  display: none;
+
+  @media ${QUERIES.desktopAndAbove} {
+    font-size: 0.75rem;
+    display: flex;
+    gap: clamp(1rem, 3vw, 4rem);
+    align-items: top;
+  }
+`
+
+const NavLink = styled.li`
+  color: var(--color-dark-blue-200);
+  list-style: none;
+  cursor: pointer;
 `
 
 const LogoWrapper = styled.div`
