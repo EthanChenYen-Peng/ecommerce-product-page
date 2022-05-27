@@ -1,14 +1,18 @@
+import { useState, useEffect } from 'react'
 import styled from 'styled-components/macro'
 import { QUERIES } from '../../constants'
 import SelectionAmountBtn from './SelectionAmountBtn'
 import CartIcon from 'jsx:../../images/icon-cart.svg'
 import Carousel from '../Carousel'
+import CarouselOverlay from '../Carousel/CarouselOverlay'
 
 export default function MainSection() {
+  const [open, setOpen] = useState(false)
+
   return (
     <Container>
       <ImageSection>
-        <Carousel />
+        <Carousel triggerOverlay={() => setOpen(true)} />
       </ImageSection>
       <InfoSection>
         <StoreInfo>Sneaker Company</StoreInfo>
@@ -33,6 +37,7 @@ export default function MainSection() {
           </AddToCartBtn>
         </ButtonContainer>
       </InfoSection>
+      <CarouselOverlay open={open} close={() => setOpen(false)} />
     </Container>
   )
 }
@@ -113,6 +118,9 @@ const ImageSection = styled.div`
 
   @media ${QUERIES.desktopAndAbove} {
     flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 `
 
@@ -120,6 +128,7 @@ const InfoSection = styled.div`
   padding: 1rem;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: 1rem;
 
   @media ${QUERIES.desktopAndAbove} {
@@ -151,9 +160,10 @@ const Container = styled.div`
   @media ${QUERIES.desktopAndAbove} {
     gap: 50px;
     flex-direction: row;
-    margin-top: 100px;
     width: 70%;
     margin-left: auto;
     margin-right: auto;
+    padding-top: 100px;
+    padding-bottom: 200px;
   }
 `
