@@ -1,11 +1,16 @@
 import React, { useState, useRef } from 'react'
 import styled from 'styled-components/macro'
 import productOne from '../../images/image-product-1.jpg'
+import productTwo from '../../images/image-product-2.jpg'
+import productThree from '../../images/image-product-3.jpg'
+import productFour from '../../images/image-product-4.jpg'
 import NextIcon from 'jsx:../../images/icon-next.svg'
 import PreviousIcon from 'jsx:../../images/icon-previous.svg'
 
+const productImages = [productOne, productTwo, productThree, productFour]
 function Carousel() {
   const [centerHeight, setCenterHeight] = useState(0)
+  const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const containerRef = useRef<HTMLDivElement>(null)
   const displayBtn = centerHeight !== 0
 
@@ -21,12 +26,20 @@ function Carousel() {
   return (
     <Container ref={containerRef}>
       <ImageContainer>
-        <img src={productOne} />
+        <img src={productImages[currentImageIndex]} />
       </ImageContainer>
-      <NextIconWrapper top={`${centerHeight}px`} displayBtn={displayBtn}>
+      <NextIconWrapper
+        top={`${centerHeight}px`}
+        displayBtn={displayBtn}
+        onClick={() => setCurrentImageIndex(currentImageIndex + 1)}
+      >
         <NextIcon />
       </NextIconWrapper>
-      <PreviousIconWrapper top={`${centerHeight}px`} displayBtn={displayBtn}>
+      <PreviousIconWrapper
+        top={`${centerHeight}px`}
+        displayBtn={displayBtn}
+        onClick={() => setCurrentImageIndex(currentImageIndex - 1)}
+      >
         <PreviousIcon />
       </PreviousIconWrapper>
     </Container>
