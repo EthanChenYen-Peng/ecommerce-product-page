@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React from 'react'
 import styled from 'styled-components/macro'
 import NextIcon from 'jsx:../../images/icon-next.svg'
 import PreviousIcon from 'jsx:../../images/icon-previous.svg'
@@ -19,26 +19,13 @@ function MainImage({
   triggerOverlay,
   withNavBtns = false,
 }: Props) {
-  const [centerHeight, setCenterHeight] = useState(0)
-  const containerRef = useRef<HTMLDivElement>(null)
-  const displayNextBtn =
-    centerHeight !== 0 && currentImageIndex < images.length - 1
-  const displayPreviousBtn = centerHeight !== 0 && currentImageIndex > 0
+  const displayNextBtn = currentImageIndex < images.length - 1
+  const displayPreviousBtn = currentImageIndex > 0
   const displayPreviousBtnOnDesktop = displayPreviousBtn && withNavBtns
   const displayNextBtnOnDesktop = displayNextBtn && withNavBtns
 
-  React.useEffect(() => {
-    setTimeout(() => {
-      const rect = containerRef.current?.getClientRects()
-      if (rect) {
-        const height = rect[0].height
-        setCenterHeight(Math.floor(height / 2))
-      }
-    }, 100)
-  }, [])
-
   return (
-    <Container ref={containerRef}>
+    <Container>
       <ImageContainer
         onClick={triggerOverlay}
         currentImageIndex={currentImageIndex}
@@ -48,7 +35,6 @@ function MainImage({
         ))}
       </ImageContainer>
       <NextIconWrapper
-        top={`${centerHeight}px`}
         displayBtn={displayNextBtn}
         displayBtnOnDesktop={displayNextBtnOnDesktop}
         onClick={() => setCurrentImageIndex(currentImageIndex + 1)}
@@ -56,7 +42,6 @@ function MainImage({
         <NextIcon />
       </NextIconWrapper>
       <PreviousIconWrapper
-        top={`${centerHeight}px`}
         displayBtn={displayPreviousBtn}
         displayBtnOnDesktop={displayPreviousBtnOnDesktop}
         onClick={() => setCurrentImageIndex(currentImageIndex - 1)}
@@ -110,14 +95,13 @@ const IconWrapper = styled.button`
 const NextIconWrapper = styled(IconWrapper)<{
   displayBtn: boolean
   displayBtnOnDesktop: boolean
-  top: string
 }>`
   position: absolute;
   right: 1.25rem;
   display: ${(props) => (props.displayBtn ? 'block' : 'none')};
   opacity: ${(props) => (props.displayBtn ? 1 : 0)};
   transition: opacity 0.3s;
-  top: ${(props) => props.top};
+  top: 50%;
   transform: translateY(-50%);
 
   @media ${QUERIES.desktopAndAbove} {
@@ -129,14 +113,13 @@ const NextIconWrapper = styled(IconWrapper)<{
 const PreviousIconWrapper = styled(IconWrapper)<{
   displayBtn: boolean
   displayBtnOnDesktop: boolean
-  top: string
 }>`
   position: absolute;
   left: 1.25rem;
   display: ${(props) => (props.displayBtn ? 'block' : 'none')};
   opacity: ${(props) => (props.displayBtn ? 1 : 0)};
   transition: opacity 0.3s;
-  top: ${(props) => props.top};
+  top: 50%;
   transform: translateY(-50%);
   svg {
     transform: translateX(-1px);
