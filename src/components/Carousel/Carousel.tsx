@@ -11,8 +11,11 @@ const productImages = [productOne, productTwo, productThree, productFour]
 function Carousel() {
   const [centerHeight, setCenterHeight] = useState(0)
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
+  const [translateX, setTranslateX] = useState(0)
   const containerRef = useRef<HTMLDivElement>(null)
-  const displayBtn = centerHeight !== 0
+  const displayNextBtn =
+    centerHeight !== 0 && currentImageIndex < productImages.length - 1
+  const displayPreviousBtn = centerHeight !== 0 && currentImageIndex > 0
 
   React.useEffect(() => {
     setTimeout(() => {
@@ -23,21 +26,33 @@ function Carousel() {
       }
     }, 100)
   }, [])
+
+  React.useEffect(() => {
+    const rect = containerRef.current?.getClientRects()
+
+    if (rect) {
+      const width = rect[0].width
+      setTranslateX(currentImageIndex * width * -1)
+    }
+  }, [currentImageIndex])
+
   return (
     <Container ref={containerRef}>
-      <ImageContainer>
-        <img src={productImages[currentImageIndex]} />
+      <ImageContainer translateX={`${translateX}px`}>
+        {productImages.map((product) => (
+          <img src={product} key={product} />
+        ))}
       </ImageContainer>
       <NextIconWrapper
         top={`${centerHeight}px`}
-        displayBtn={displayBtn}
+        displayBtn={displayNextBtn}
         onClick={() => setCurrentImageIndex(currentImageIndex + 1)}
       >
         <NextIcon />
       </NextIconWrapper>
       <PreviousIconWrapper
         top={`${centerHeight}px`}
-        displayBtn={displayBtn}
+        displayBtn={displayPreviousBtn}
         onClick={() => setCurrentImageIndex(currentImageIndex - 1)}
       >
         <PreviousIcon />
@@ -52,12 +67,16 @@ const Container = styled.div`
   position: relative;
 `
 
-const ImageContainer = styled.div`
+const ImageContainer = styled.div<{ translateX: string }>`
+  display: flex;
+  overflow: hidden;
   img {
     object-fit: cover;
     max-height: 600px;
     width: 100%;
     display: block;
+    transform: ${(props) => `translateX(${props.translateX || '0px'})`};
+    transition: transform 0.3s;
   }
 `
 
@@ -78,6 +97,7 @@ const NextIconWrapper = styled(IconWrapper)<{
 }>`
   position: absolute;
   right: 1.25rem;
+  display: ${(props) => (props.displayBtn ? 'block' : 'none')};
   opacity: ${(props) => (props.displayBtn ? 1 : 0)};
   transition: opacity 0.3s;
   top: ${(props) => props.top};
@@ -90,8 +110,12 @@ const PreviousIconWrapper = styled(IconWrapper)<{
 }>`
   position: absolute;
   left: 1.25rem;
+  display: ${(props) => (props.displayBtn ? 'block' : 'none')};
   opacity: ${(props) => (props.displayBtn ? 1 : 0)};
   transition: opacity 0.3s;
   top: ${(props) => props.top};
   transform: translateY(-50%);
+  svg {
+    transform: translateX(-1px);
+  }
 `
