@@ -2,12 +2,13 @@ import styled from 'styled-components/macro'
 import { QUERIES } from '../../constants'
 import SelectionAmountBtn from './SelectionAmountBtn'
 import CartIcon from 'jsx:../../images/icon-cart.svg'
+import Carousel from '../Carousel'
 
 export default function MainSection() {
   return (
     <Container>
       <ImageSection>
-        <p>Image</p>
+        <Carousel />
       </ImageSection>
       <InfoSection>
         <StoreInfo>Sneaker Company</StoreInfo>
@@ -109,7 +110,6 @@ const PriceContainer = styled.div`
 `
 const ImageSection = styled.div`
   min-height: 350px;
-  background-color: blue;
 
   @media ${QUERIES.desktopAndAbove} {
     flex: 1;
