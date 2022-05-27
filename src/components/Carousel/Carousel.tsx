@@ -11,7 +11,6 @@ const productImages = [productOne, productTwo, productThree, productFour]
 function Carousel() {
   const [centerHeight, setCenterHeight] = useState(0)
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
-  const [translateX, setTranslateX] = useState(0)
   const containerRef = useRef<HTMLDivElement>(null)
   const displayNextBtn =
     centerHeight !== 0 && currentImageIndex < productImages.length - 1
@@ -27,18 +26,9 @@ function Carousel() {
     }, 100)
   }, [])
 
-  React.useEffect(() => {
-    const rect = containerRef.current?.getClientRects()
-
-    if (rect) {
-      const width = rect[0].width
-      setTranslateX(currentImageIndex * width * -1)
-    }
-  }, [currentImageIndex])
-
   return (
     <Container ref={containerRef}>
-      <ImageContainer translateX={`${translateX}px`}>
+      <ImageContainer currentImageIndex={currentImageIndex}>
         {productImages.map((product) => (
           <img src={product} key={product} />
         ))}
@@ -67,7 +57,7 @@ const Container = styled.div`
   position: relative;
 `
 
-const ImageContainer = styled.div<{ translateX: string }>`
+const ImageContainer = styled.div<{ currentImageIndex: number }>`
   display: flex;
   overflow: hidden;
   img {
@@ -75,7 +65,8 @@ const ImageContainer = styled.div<{ translateX: string }>`
     max-height: 600px;
     width: 100%;
     display: block;
-    transform: ${(props) => `translateX(${props.translateX || '0px'})`};
+    transform: ${(props) =>
+      `translateX(calc(-100% * ${props.currentImageIndex}))`};
     transition: transform 0.3s;
   }
 `
