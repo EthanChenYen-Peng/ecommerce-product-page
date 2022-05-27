@@ -18,8 +18,10 @@ export default function MainSection() {
           the weather can offer.
         </ItemInfo>
         <PriceContainer>
-          <CurrentPrice>125.00</CurrentPrice>
-          <DiscountPercentage>50</DiscountPercentage>
+          <CurrentPriceContainer>
+            <CurrentPrice>125.00</CurrentPrice>
+            <DiscountPercentage>50</DiscountPercentage>
+          </CurrentPriceContainer>
           <OriginalPrice>250</OriginalPrice>
         </PriceContainer>
         <ButtonContainer>
@@ -38,6 +40,9 @@ const ButtonContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  @media ${QUERIES.desktopAndAbove} {
+    flex-direction: row;
+  }
 `
 
 const AddToCartBtn = styled.button`
@@ -53,8 +58,17 @@ const AddToCartBtn = styled.button`
     fill: white;
     height: 1em;
   }
+
+  @media ${QUERIES.desktopAndAbove} {
+    flex: 2;
+  }
 `
 
+const CurrentPriceContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+`
 const CurrentPrice = styled.span`
   &:before {
     content: '$';
@@ -69,7 +83,6 @@ const OriginalPrice = styled.span`
   }
   text-decoration: line-through;
   color: var(--color-dark-blue-100);
-  margin-left: auto;
   font-weight: 500;
 `
 
@@ -86,11 +99,21 @@ const DiscountPercentage = styled.span`
 const PriceContainer = styled.div`
   display: flex;
   align-items: center;
-  gap: 1rem;
+  justify-content: space-between;
+
+  @media ${QUERIES.desktopAndAbove} {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
 `
 const ImageSection = styled.div`
   min-height: 350px;
   background-color: blue;
+
+  @media ${QUERIES.desktopAndAbove} {
+    flex: 1;
+  }
 `
 
 const InfoSection = styled.div`
@@ -98,6 +121,11 @@ const InfoSection = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+
+  @media ${QUERIES.desktopAndAbove} {
+    padding: 70px 30px;
+    flex: 1;
+  }
 `
 const ItemInfo = styled.p`
   color: var(--color-dark-blue-200);
@@ -120,4 +148,12 @@ const StoreInfo = styled.h2`
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+  @media ${QUERIES.desktopAndAbove} {
+    gap: 50px;
+    flex-direction: row;
+    margin-top: 100px;
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+  }
 `

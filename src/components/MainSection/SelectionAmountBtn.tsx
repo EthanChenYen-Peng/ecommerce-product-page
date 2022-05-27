@@ -1,4 +1,5 @@
 import styled from 'styled-components/macro'
+import { QUERIES } from '../../constants'
 import PlusIcon from 'jsx:../../images/icon-plus.svg'
 import MinusIcon from 'jsx:../../images/icon-minus.svg'
 
@@ -24,6 +25,10 @@ const Container = styled.div`
   padding: 1rem;
   background-color: var(--color-dark-blue-50);
   border-radius: 10px;
+
+  @media ${QUERIES.desktopAndAbove} {
+    flex: 1;
+  }
 `
 
 const StyledBtn = styled.button`
