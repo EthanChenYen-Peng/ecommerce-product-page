@@ -3,13 +3,13 @@ import styled from 'styled-components/macro'
 import { QUERIES } from '../../constants'
 import Avatar from './Avatar'
 import MobileMenu from './MobileMenu'
+import CartQuantity from './CartQuantity'
 import LogoIcon from 'jsx:../../images/logo.svg'
 import MenuIcon from 'jsx:../../images/icon-menu.svg'
 import CartIcon from 'jsx:../../images/icon-cart.svg'
 import avatarImg from '../../images/image-avatar.png'
 export default function Header() {
   const [open, setOpen] = useState(false)
-  console.log(open)
   return (
     <Nav>
       <Wrapper>
@@ -29,6 +29,7 @@ export default function Header() {
       </Wrapper>
       <UserMenu>
         <CarBtn>
+          <CartQuantity />
           <CartIcon />
         </CarBtn>
         <Avatar image={avatarImg} />
@@ -39,11 +40,12 @@ export default function Header() {
 }
 
 const CarBtn = styled.button`
+  position: relative;
   background-color: inherit;
   border: 0;
 
   svg {
-    transform: scale(0.7);
+    transform: scale(0.9);
   }
 `
 const Nav = styled.nav`
