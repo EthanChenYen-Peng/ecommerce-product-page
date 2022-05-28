@@ -59,10 +59,13 @@ const AddToCartBtn = styled.button`
   border: none;
   padding: 1rem;
   border-radius: 10px;
+  gap: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-  & svg {
+  svg path {
     fill: white;
-    height: 1em;
   }
 
   @media ${QUERIES.desktopAndAbove} {

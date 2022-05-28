@@ -107,6 +107,9 @@ const NextIconWrapper = styled(IconWrapper)<{
   @media ${QUERIES.desktopAndAbove} {
     right: -1.5rem;
     display: ${(props) => (props.displayBtnOnDesktop ? 'block' : 'none')};
+    svg:hover path {
+      stroke: var(--color-orange-100);
+    }
   }
 `
 
@@ -128,5 +131,8 @@ const PreviousIconWrapper = styled(IconWrapper)<{
   @media ${QUERIES.desktopAndAbove} {
     left: -1.5rem;
     display: ${(props) => (props.displayBtnOnDesktop ? 'block' : 'none')};
+    svg:hover path {
+      stroke: var(--color-orange-100);
+    }
   }
 `
