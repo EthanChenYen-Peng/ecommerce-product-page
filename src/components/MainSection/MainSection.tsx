@@ -1,13 +1,23 @@
-import { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components/macro'
 import { QUERIES } from '../../constants'
 import SelectionAmountBtn from './SelectionAmountBtn'
 import CartIcon from 'jsx:../../images/icon-cart.svg'
 import Carousel from '../Carousel'
 import CarouselOverlay from '../Carousel/CarouselOverlay'
+import { useDispatch } from 'react-redux'
+import { addToCart } from '../../features/cart/cartSlice'
 
 export default function MainSection() {
   const [open, setOpen] = useState(false)
+  const dispatch = useDispatch()
+
+  const addItem: React.MouseEventHandler<HTMLButtonElement> = (e) => {
+    const productId = e.currentTarget.dataset.productId
+    if (productId) {
+      dispatch(addToCart({ productId, quantity: 2 }))
+    }
+  }
 
   return (
     <Container>
@@ -31,7 +41,7 @@ export default function MainSection() {
         </PriceContainer>
         <ButtonContainer>
           <SelectionAmountBtn />
-          <AddToCartBtn>
+          <AddToCartBtn data-product-id="product-one" onClick={addItem}>
             <CartIcon />
             Add to cart
           </AddToCartBtn>
@@ -63,6 +73,7 @@ const AddToCartBtn = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 
   svg path {
     fill: white;
