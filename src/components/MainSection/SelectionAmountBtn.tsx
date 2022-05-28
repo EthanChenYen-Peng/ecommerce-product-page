@@ -3,14 +3,27 @@ import { QUERIES } from '../../constants'
 import PlusIcon from 'jsx:../../images/icon-plus.svg'
 import MinusIcon from 'jsx:../../images/icon-minus.svg'
 
-function SelectionAmountBtn() {
+interface Props {
+  quantity: number
+  setQuantity: (n: number) => void
+}
+function SelectionAmountBtn({ quantity, setQuantity }: Props) {
+  const increment = () => {
+    setQuantity(quantity + 1)
+  }
+
+  const decrement = () => {
+    if (quantity > 0) {
+      setQuantity(quantity - 1)
+    }
+  }
   return (
     <Container>
-      <StyledBtn>
+      <StyledBtn onClick={decrement}>
         <MinusIcon />
       </StyledBtn>
-      0
-      <StyledBtn>
+      {quantity}
+      <StyledBtn onClick={increment}>
         <PlusIcon />
       </StyledBtn>
     </Container>
@@ -34,4 +47,5 @@ const Container = styled.div`
 const StyledBtn = styled.button`
   background-color: inherit;
   border: none;
+  cursor: pointer;
 `

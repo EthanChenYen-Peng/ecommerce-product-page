@@ -10,12 +10,13 @@ import { addToCart } from '../../features/cart/cartSlice'
 
 export default function MainSection() {
   const [open, setOpen] = useState(false)
+  const [quantity, setQuantity] = useState(0)
   const dispatch = useDispatch()
 
   const addItem: React.MouseEventHandler<HTMLButtonElement> = (e) => {
     const productId = e.currentTarget.dataset.productId
     if (productId) {
-      dispatch(addToCart({ productId, quantity: 2 }))
+      dispatch(addToCart({ productId, quantity }))
     }
   }
 
@@ -40,7 +41,7 @@ export default function MainSection() {
           <OriginalPrice>250</OriginalPrice>
         </PriceContainer>
         <ButtonContainer>
-          <SelectionAmountBtn />
+          <SelectionAmountBtn quantity={quantity} setQuantity={setQuantity} />
           <AddToCartBtn data-product-id="product-one" onClick={addItem}>
             <CartIcon />
             Add to cart
