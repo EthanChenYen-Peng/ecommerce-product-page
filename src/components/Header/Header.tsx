@@ -6,6 +6,7 @@ import MobileMenu from './MobileMenu'
 import CartQuantity from './CartQuantity'
 import LogoIcon from 'jsx:../../images/logo.svg'
 import MenuIcon from 'jsx:../../images/icon-menu.svg'
+import CartItemList from './CartItemList'
 import CartIcon from 'jsx:../../images/icon-cart.svg'
 import avatarImg from '../../images/image-avatar.png'
 export default function Header() {
@@ -35,6 +36,7 @@ export default function Header() {
         <Avatar image={avatarImg} />
       </UserMenu>
       <MobileMenu open={open} close={() => setOpen(false)} />
+      <CartItemList />
     </Nav>
   )
 }
@@ -52,6 +54,7 @@ const Nav = styled.nav`
   display: flex;
   align-items: center;
   padding: 12px 8px;
+  position: relative;
 
   @media ${QUERIES.desktopAndAbove} {
     padding-left: 0;
