@@ -11,6 +11,7 @@ import CartIcon from 'jsx:../../images/icon-cart.svg'
 import avatarImg from '../../images/image-avatar.png'
 export default function Header() {
   const [open, setOpen] = useState(false)
+  const [cartOpen, setCartOpen] = useState(false)
   return (
     <Nav>
       <Wrapper>
@@ -29,14 +30,14 @@ export default function Header() {
         </DesktopNav>
       </Wrapper>
       <UserMenu>
-        <CarBtn>
+        <CarBtn onClick={() => setCartOpen(!cartOpen)}>
           <CartQuantity />
           <CartIcon />
         </CarBtn>
         <Avatar image={avatarImg} />
       </UserMenu>
       <MobileMenu open={open} close={() => setOpen(false)} />
-      <CartItemList />
+      <CartItemList open={cartOpen} />
     </Nav>
   )
 }

@@ -1,13 +1,13 @@
 import styled from 'styled-components/macro'
 import productOne from '../../images/image-product-1-thumbnail.jpg'
 import DeleteIcon from 'jsx:../../images/icon-delete.svg'
-function CartItemList() {
+function CartItemList({ open }: { open: boolean }) {
   const name = 'Fall Limited Edition Sneakers'
   const price = 125
   const quantity = 3
   const total = price * quantity
   return (
-    <Container>
+    <Container open={open}>
       <Header>Cart</Header>
       <ItemContainer>
         <ItemImageContainer>
@@ -105,7 +105,11 @@ const Header = styled.div`
   padding: 2rem;
 `
 
-const Container = styled.div`
+const Container = styled.div<{ open: boolean }>`
+  opacity: ${(props) => (props.open ? '1' : '0')};
+  transform: ${(props) => (props.open ? 'translateY(0%)' : 'translateY(30px)')};
+  transition: transform 0.5s, opacity 0.3s;
+  pointer-events: ${(props) => (props.open ? '' : 'none')};
   position: absolute;
   width: 95%;
   max-width: 400px;
