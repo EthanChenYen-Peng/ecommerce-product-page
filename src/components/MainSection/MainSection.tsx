@@ -7,11 +7,16 @@ import Carousel from '../Carousel'
 import CarouselOverlay from '../Carousel/CarouselOverlay'
 import { useDispatch } from 'react-redux'
 import { addToCart } from '../../features/cart/cartSlice'
-
+import { PRODUCTS } from '../../data'
+import { formatPrice } from '../../utils'
 export default function MainSection() {
   const [open, setOpen] = useState(false)
   const [quantity, setQuantity] = useState(0)
   const dispatch = useDispatch()
+
+  const { priceInCents, name, id } = PRODUCTS[0]
+  const discountPercentage = 50
+  const discountedPrice = (priceInCents * 50) / 100
 
   const addItem: React.MouseEventHandler<HTMLButtonElement> = (e) => {
     const productId = e.currentTarget.dataset.productId
@@ -35,14 +40,14 @@ export default function MainSection() {
         </ItemInfo>
         <PriceContainer>
           <CurrentPriceContainer>
-            <CurrentPrice>125.00</CurrentPrice>
+            <CurrentPrice>{formatPrice(discountedPrice)}</CurrentPrice>
             <DiscountPercentage>50</DiscountPercentage>
           </CurrentPriceContainer>
-          <OriginalPrice>250</OriginalPrice>
+          <OriginalPrice>{formatPrice(priceInCents)}</OriginalPrice>
         </PriceContainer>
         <ButtonContainer>
           <SelectionAmountBtn quantity={quantity} setQuantity={setQuantity} />
-          <AddToCartBtn data-product-id="product-one" onClick={addItem}>
+          <AddToCartBtn data-product-id={id} onClick={addItem}>
             <CartIcon />
             Add to cart
           </AddToCartBtn>
