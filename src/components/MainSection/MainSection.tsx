@@ -5,14 +5,14 @@ import SelectionAmountBtn from './SelectionAmountBtn'
 import CartIcon from 'jsx:../../images/icon-cart.svg'
 import Carousel from '../Carousel'
 import CarouselOverlay from '../Carousel/CarouselOverlay'
-import { useDispatch } from 'react-redux'
+import { useAppDispatch } from '../../redux/hook'
 import { addToCart } from '../../features/cart/cartSlice'
 import { PRODUCTS } from '../../data'
 import { formatPrice } from '../../utils'
 export default function MainSection() {
   const [open, setOpen] = useState(false)
   const [quantity, setQuantity] = useState(0)
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
   const { priceInCents, name, id } = PRODUCTS[0]
   const discountPercent = 50
