@@ -1,17 +1,18 @@
 import styled from 'styled-components/macro'
+import { ItemPayload } from '../../features/cart/cartSlice'
 import { useAppSelector } from '../../redux/hook'
 function CartQuantity() {
   const { items } = useAppSelector((state) => state.cart)
-  const total = calculateTotalItems(items)
+  const total = calculateTotalItems(Object.values(items))
   const toShow = total > 0
 
   return <Container toShow={toShow}>{total}</Container>
 }
 
-function calculateTotalItems(items: { [key: string]: number }) {
+function calculateTotalItems(items: ItemPayload[]) {
   let total = 0
-  for (const [, value] of Object.entries(items)) {
-    total += value
+  for (const item of items) {
+    total += item.quantity
   }
   return total
 }

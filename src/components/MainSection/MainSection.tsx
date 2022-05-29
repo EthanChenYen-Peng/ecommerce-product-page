@@ -15,13 +15,15 @@ export default function MainSection() {
   const dispatch = useDispatch()
 
   const { priceInCents, name, id } = PRODUCTS[0]
-  const discountPercentage = 50
+  const discountPercent = 50
   const discountedPrice = (priceInCents * 50) / 100
 
   const addItem: React.MouseEventHandler<HTMLButtonElement> = (e) => {
     const productId = e.currentTarget.dataset.productId
     if (productId) {
-      dispatch(addToCart({ productId, quantity }))
+      dispatch(
+        addToCart({ productId, quantity, name, priceInCents, discountPercent })
+      )
     }
   }
 
@@ -41,7 +43,7 @@ export default function MainSection() {
         <PriceContainer>
           <CurrentPriceContainer>
             <CurrentPrice>{formatPrice(discountedPrice)}</CurrentPrice>
-            <DiscountPercentage>50</DiscountPercentage>
+            <DiscountPercentage>{discountPercent}</DiscountPercentage>
           </CurrentPriceContainer>
           <OriginalPrice>{formatPrice(priceInCents)}</OriginalPrice>
         </PriceContainer>

@@ -1,31 +1,41 @@
 import styled from 'styled-components/macro'
 import productOne from '../../images/image-product-1-thumbnail.jpg'
 import DeleteIcon from 'jsx:../../images/icon-delete.svg'
+import { useAppDispatch, useAppSelector } from '../../redux/hook'
+import { formatPrice } from '../../utils'
+import { removeFromCart } from '../../features/cart/cartSlice'
+
 function CartItemList({ open }: { open: boolean }) {
-  const name = 'Fall Limited Edition Sneakers'
-  const price = 125
-  const quantity = 3
-  const total = price * quantity
+  const dispatch = useAppDispatch()
+  const items = Object.entries(useAppSelector((state) => state.cart.items))
+  const deleteProduct = (productId: string) => {
+    dispatch(removeFromCart({ productId }))
+  }
+  const disableBtn = items.length === 0
   return (
     <Container open={open}>
       <Header>Cart</Header>
       <ItemContainer>
-        <ItemImageContainer>
-          <img src={productOne} />
-        </ItemImageContainer>
-        <ItemInfo>
-          <ItemName>{name}</ItemName>
-          <PriceContainer>
-            ${price.toFixed(2)} x {quantity}
-            <TotalPrice>${total.toFixed(2)}</TotalPrice>
-          </PriceContainer>
-        </ItemInfo>
-        <DeleteButtonContainer>
-          <DeleteIcon />
-        </DeleteButtonContainer>
+        {items.map(([productId, { name, priceInCents, quantity }]) => (
+          <>
+            <ItemImageContainer>
+              <img src={productOne} />
+            </ItemImageContainer>
+            <ItemInfo>
+              <ItemName>{name}</ItemName>
+              <PriceContainer>
+                ${formatPrice(priceInCents)} x {quantity}
+                <TotalPrice>${formatPrice(priceInCents * quantity)}</TotalPrice>
+              </PriceContainer>
+            </ItemInfo>
+            <DeleteButtonContainer onClick={() => deleteProduct(productId)}>
+              <DeleteIcon />
+            </DeleteButtonContainer>
+          </>
+        ))}
       </ItemContainer>
       <ButtonContainer>
-        <CheckOutBtn>Checkout</CheckOutBtn>
+        <CheckOutBtn disableBtn={disableBtn}>Checkout</CheckOutBtn>
       </ButtonContainer>
     </Container>
   )
@@ -53,8 +63,11 @@ const ItemName = styled.p`
   max-width: 160px;
 `
 
-const CheckOutBtn = styled.button`
-  background-color: var(--color-orange-100);
+const CheckOutBtn = styled.button<{ disableBtn: boolean }>`
+  background-color: ${(props) =>
+    props.disableBtn
+      ? 'var(--color-dark-blue-100)'
+      : 'var(--color-orange-100)'};
   font-weight: 500;
   font-size: 1.125rem;
   color: white;
@@ -65,7 +78,7 @@ const CheckOutBtn = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  cursor: pointer;
+  cursor: ${(props) => (props.disableBtn ? '' : 'pointer')};
   width: 100%;
 `
 const PriceContainer = styled.div`
